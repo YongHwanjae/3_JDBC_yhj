@@ -123,7 +123,7 @@ public class JDBCExample {
 				System.out.printf("사번 : %s / 이름 : %s / 급여 : %d / 입사일 : %s\n",
 									empId, empName, salary, hireDate.toString());
 			
-		
+
 				
 				// java.sql.Date의 toString()은 yyyy-mm-dd 형식으로 오버라이딩 되어있음.
 			}
