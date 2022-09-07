@@ -55,7 +55,7 @@ public class JDBCExample5 {
 				
 				Employee emp = new Employee(); // 기본 생성자로 Employee 객체 생성
 											   // 필드 초기화X
-					                           // setter를 이용해서 하나씪 세팅
+					                           // setter를 이용해서 하나씩 세팅
 				
 				emp.setEmpName(rs.getString("이름"));// 조회시 컬럼명이 "이름"
 				emp.setHireDate(rs.getString("입사일"));// 조회시 컬럼명이 "입사일"
