@@ -49,6 +49,28 @@ public class Employee {
 		this.salLevel = salLevel;
 		this.bonus = bonus;
 		this.managerId = managerId;
+		
+		
+		
+		
+	}
+
+	public Employee(int empId, String empName, String empNo, String email, String phone, String departmentTitle,
+			String jobName, int salary, String deptCode, String jobCode, String salLevel, double bonus, int managerId) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.empNo = empNo;
+		this.email = email;
+		this.phone = phone;
+		this.departmentTitle = departmentTitle;
+		this.jobName = jobName;
+		this.salary = salary;
+		this.deptCode = deptCode;
+		this.jobCode = jobCode;
+		this.salLevel = salLevel;
+		this.bonus = bonus;
+		this.managerId = managerId;
 	}
 
 	public int getEmpId() {

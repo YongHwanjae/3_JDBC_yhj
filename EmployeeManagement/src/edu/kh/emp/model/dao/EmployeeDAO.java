@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.kh.emp.model.vo.Employee;
 
@@ -364,11 +366,6 @@ public class EmployeeDAO {
 			if(result ==0)conn.rollback();
 			else          conn.commit();
 			
-			
-				
-			
-			
-			
 		} catch(Exception e) {
 		e.printStackTrace();
 		} finally {
@@ -411,7 +408,6 @@ public class EmployeeDAO {
 			
 			if(result>0) conn.commit();
 			else          conn.rollback();
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -421,9 +417,134 @@ public class EmployeeDAO {
 			} catch(SQLException e) {
 				e.printStackTrace();
 		}
-		
-		
 	}
-			return result;	}
+		return result;			
+	}
+
+
+	public List<Employee> selectDeptEmp(String departmentTitle) {
+		List<Employee> emplist = new ArrayList<>();
+		
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, pw);
+			
+			String sql = "SELECT * FROM EMPLOYEE "
+					+ "            LEFT JOIN DEPARTMENT ON(DEPT_ID = DEPT_CODE)"
+					+ "            JOIN JOB USING(JOB_CODE)"
+					+ "            WHERE DEPT_TITLE = '" + departmentTitle + "'";
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				int empId = rs.getInt("EMP_ID");     
+				String empName = rs.getString("EMP_NAME");
+				String empNo = rs.getString("EMP_NO");
+				String email = rs.getString("EMAIL");
+				String phone = rs.getString("PHONE");
+				String jobName = rs.getString("JOB_NAME");
+				int salary = rs.getInt("SALARY");
+				String deptCode = rs.getString("DEPT_CODE");
+				String jobCode = rs.getString("JOB_CODE");
+				String salLevel = rs.getString("SAL_LEVEL");
+				double bonus = rs.getDouble("BONUS");
+				int managerId = rs.getInt("MANAGER_ID");
+				
+				Employee emp = new Employee(empId, empName, empNo, email, phone, departmentTitle, jobName, salary, deptCode, jobCode, salLevel, bonus, managerId);
+				emplist.add(emp);
+			}	
+		} catch(Exception e ) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!= null) rs.close();
+				if(stmt!= null) stmt.close();
+				if(conn!= null)conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return emplist;
+	}
+	public List<Employee> selectSalaryEmp(int salary2) {
+		List<Employee> emplist = new ArrayList<>();
+		
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, pw);
+			
+			String sql = "SELECT * FROM EMPLOYEE "
+					+ "            LEFT JOIN DEPARTMENT ON(DEPT_ID = DEPT_CODE)"
+					+ "            JOIN JOB USING(JOB_CODE)"
+					+ "            WHERE SALARY >= " + salary2;
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				int empId = rs.getInt("EMP_ID");     
+				String empName = rs.getString("EMP_NAME");
+				String empNo = rs.getString("EMP_NO");
+				String email = rs.getString("EMAIL");
+				String phone = rs.getString("PHONE");
+				String jobName = rs.getString("JOB_NAME");
+				String departmentTitle = rs.getString("DEPT_TITLE");
+				int salary = rs.getInt("SALARY");
+				String deptCode = rs.getString("DEPT_CODE");
+				String jobCode = rs.getString("JOB_CODE");
+				String salLevel = rs.getString("SAL_LEVEL");
+				double bonus = rs.getDouble("BONUS");
+				int managerId = rs.getInt("MANAGER_ID");
+				
+				Employee emp = new Employee(empId, empName, empNo, email, phone, departmentTitle, jobName, salary, deptCode, jobCode, salLevel, bonus, managerId);
+				
+				emplist.add(emp);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(stmt!= null) stmt.close();
+				if(conn!=null) conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return emplist;
+	}
+
+
+	public Map<String, Integer> selectDeptTotalSalary() {
+		Map<String, Integer> map = new HashMap<>();
+			
+		try { 
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, pw);
+			
+			String sql = "SELECT SUM(SALARY)"
+					+ " FROM EMPLOYEE"
+					+ " LEFT JOIN DEPARTMENT ON(DEPT_ID = DEPT_CODE)"
+					+ " JOIN JOB USING(JOB_CODE)"
+					+ " GROUP BY DEPT_CODE";
+					
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+			}
+			
+		} catch(Exception e) {
+			
+		} finally {
+			
+		}
+		
+		
+		return map;
+	}
 }	
+	
 
