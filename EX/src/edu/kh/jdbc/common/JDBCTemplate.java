@@ -43,7 +43,7 @@ public class JDBCTemplate {
 				// Map<String, String> 행테의 객체, XML 입출력 특화
 				
 				// driver.xml 파일 읽어오기
-				prop.loadFromXML(new FileInputStream("driver.xml"));
+				prop.loadFromXML(new FileInputStream("driver2.xml"));
 				// -> XML 파일에 작성된 내용이 Properties 객체에 모두 저장됨.
 				
 				// XML에서 읽어온 값을 모두 Stiring 변수에 저장
