@@ -2,4 +2,27 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>player-query.xml file</comment>
+
+<!-- 로그인 -->
+<entry key="loginPlayer">
+SELECT PLAYER_NO, PLAYER_NM, PLAYER_SALARY, PLAYER_TEAM, PLAYER_ENROLL, PLAYER_PASSWORD
+FROM PLAYER
+WHERE PLAYER_NO = ?
+AND PLAYER_PASSWORD = ?
+AND PLAYER_TEAM = 'NY'
+</entry>
+
+<!-- 번호 중복 -->
+<entry key="dup">
+SELECT COUNT(*)
+FROM PLAYER
+WHERE PLAYER_NO = ?
+</entry>
+
+<!-- 등록 -->
+<entry key="enroll">
+INSERT INTO PLAYER
+VALUES(?, ?, ?, DEFAULT, DEFAULT, ?)
+</entry>
+
 </properties>

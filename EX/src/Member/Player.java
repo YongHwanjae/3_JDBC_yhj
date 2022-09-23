@@ -5,8 +5,8 @@ public class Player {
 	private int playerNo;
 	private String playerName;
 	private int salary;
-	private int join;
-	private String transfer;
+	private int enroll;
+	private String team;
 	private String password;
 
 	private int batAtTime;
@@ -22,15 +22,15 @@ public class Player {
 	
 	public Player() {}
 
-	public Player(int playerNo, String playerName, int salary, int join, String transfer, String password,
+	public Player(int playerNo, String playerName, int salary, int enroll, String team, String password,
 			int batAtTime, int hit, int homerun, double avgBat, int victory, int lose, double inning, int er,
 			double era) {
 		super();
 		this.playerNo = playerNo;
 		this.playerName = playerName;
 		this.salary = salary;
-		this.join = join;
-		this.transfer = transfer;
+		this.enroll = enroll;
+		this.team = team;
 		this.password = password;
 		this.batAtTime = batAtTime;
 		this.hit = hit;
@@ -41,6 +41,9 @@ public class Player {
 		this.inning = inning;
 		this.er = er;
 		this.era = era;
+	}
+
+	public Player(int playerNo, String playerName, int salary, String password) {
 	}
 
 	public int getPlayerNo() {
@@ -67,20 +70,20 @@ public class Player {
 		this.salary = salary;
 	}
 
-	public int getJoin() {
-		return join;
+	public int getEnroll() {
+		return enroll;
 	}
 
-	public void setJoin(int join) {
-		this.join = join;
+	public void setEnroll(int enroll) {
+		this.enroll = enroll;
 	}
 
-	public String getTransfer() {
-		return transfer;
+	public String getTeam() {
+		return team;
 	}
 
-	public void setTransfer(String transfer) {
-		this.transfer = transfer;
+	public void setTeam(String team) {
+		this.team = team;
 	}
 
 	public String getPassword() {

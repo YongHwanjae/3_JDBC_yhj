@@ -13,7 +13,7 @@ public class PlayerView {
 	
 	Scanner sc = new Scanner(System.in);
 
-	public static Player loginPlayer;
+	private Player loginPlayer;
 	
 	public void mainMenu() {
 		
@@ -22,6 +22,9 @@ public class PlayerView {
 		
 		do {
 			try {
+				if(loginPlayer == null) {
+					
+				
 				System.out.println("------------------------------------------");
 				System.out.println("1. 로그인");
 				System.out.println("2. 선수 등록");
@@ -38,9 +41,12 @@ public class PlayerView {
 				case 0 : System.out.println("종료"); break;
 				default : System.out.println("위에 보이는 숫자만 입력하세요");
 				}
+				} 
+				else {
+					System.out.println("--");
+				 
 				
-				
-				
+				}
 			} catch(InputMismatchException e) {
 				System.out.println("입력 형식이 올바르지 않습니다. ");
 				e.printStackTrace();
@@ -58,10 +64,16 @@ public class PlayerView {
 		int playerNo = sc.nextInt();
 		
 		System.out.print("비밀번호 입력 : ");
-		String password = sc.next();
+		String password = sc.next().toUpperCase();
 		
 		try {
 			loginPlayer = service.login(playerNo, password);
+			
+			if(loginPlayer != null) {
+				System.out.println("로그인 성공");
+			} else {
+				System.out.println("로그인 실패");
+			}
 			
 		} catch(Exception e) {
 			System.out.println("로그인 중 예외 발생");
@@ -72,7 +84,51 @@ public class PlayerView {
 	
 	
 	private void enrollService() {
+		System.out.println("<< 선수 등록 페이지 >>");
 		
+	
+		try {	
+		 int playerNo = 0;
+				
+				while(true) {
+				
+				System.out.print("번호 입력 : ");
+				playerNo = sc.nextInt();
+				
+				int result = service.dup(playerNo);
+				
+				if(result == 0) {
+					System.out.println("번호를 등록할 수 있습니다.");
+					break;
+				} else {
+					System.out.println("번호가 중복입니다. 다른 번호를 선택해주세요.");
+				}
+				}
+			
+				System.out.print("이름 입력 : ");
+				String playerName = sc.next();
+			
+				
+				System.out.print("연봉 입력 : ");
+				int salary = sc.nextInt();
+				
+				System.out.print("비밀번호 입력 : ");
+				String password = sc.next();
+				
+			
+				Player player = new Player(playerNo, playerName, salary, password);
+				
+				int result = service.enroll(player);
+				
+				if(result > 0) {
+					System.out.println("등록 성공");
+				} else {
+					System.out.println("등록 실패");
+				}
+			} catch(Exception e) {
+				System.out.println("예외 발생");
+				e.printStackTrace();
+		}
 	}
 	
 	
