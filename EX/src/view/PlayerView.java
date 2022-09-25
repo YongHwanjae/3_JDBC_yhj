@@ -3,6 +3,8 @@ package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import Member.Player;
 import service.PlayerService;
 
@@ -23,31 +25,88 @@ public class PlayerView {
 		do {
 			try {
 				if(loginPlayer == null) {
+						
+					
+					System.out.println("------------------------------------------");
+					System.out.println("1. 로그인");
+					System.out.println("2. 선수 등록");
+					System.out.println("0. 프로그램 종료");
+					
+					System.out.print("메뉴 선택 : ");
+					input = sc.nextInt();
+					sc.nextLine();
+					
+					switch(input) {
+					
+					case 1 : loginService(); break;
+					case 2 : enrollService(); break;
+					case 0 : System.out.println("종료"); break;
+					default : System.out.println("위에 보이는 숫자만 입력하세요");
+					}
+					} 
+					else {
+					
+						System.out.println("-------------------------------------------");
+						System.out.println(loginPlayer.getPlayerName() + "님 환영합니다!");
+						System.out.println();
+						System.out.println("선수 유형을 선택해주세요");
+						System.out.println("1. 타자");
+						System.out.println("2. 투수");
+						System.out.println("3. 관리자");
+						System.out.print("번호 입력 : ");
+						int num = sc.nextInt();
+						
+						if(num == 1) {
+							System.out.println("1. 경기 결과 입력");
+							System.out.println("2. 성적 조회");
+							System.out.println("3. 돌아가기");
+							System.out.print("번호 입력 : ");
+							int num1 = sc.nextInt();
+							
+							switch(num1) {
+							case 1 : //insertHitter(); break;
+							case 2 : //selectHitter(); break;
+							case 3 : break;
+							}
+							
+							
+						} else if(num == 2) {
+							System.out.println("1. 경기 결과 입력");
+							System.out.println("2. 성적 조회");
+							System.out.println("3. 돌아가기");
+							System.out.println("메뉴 입력 : ");
+							int num2 = sc.nextInt();
+							
+							switch(num2) {
+							case 1 : break;
+							case 2 : break;
+							case 3 : break;
+							}
+							
+							
+						} else if(num == 3) {
+							System.out.println("1. 연봉 변경");
+							System.out.println("2. 소속 변경");
+							System.out.println("3. 돌아가기");
+							System.out.print("메뉴 입력 : ");
+							int num3 = sc.nextInt();
+							
+							switch(num3) {
+							case 1 : break;
+							case 2 : break;
+							case 3 : break;
+							}
+							
+							
+						} else {
+							System.out.println("잘못 입력하셨습니다.");
+						}
 					
 				
-				System.out.println("------------------------------------------");
-				System.out.println("1. 로그인");
-				System.out.println("2. 선수 등록");
-				System.out.println("0. 프로그램 종료");
 				
-				System.out.print("메뉴 선택 : ");
-				input = sc.nextInt();
-				sc.nextLine();
 				
-				switch(input) {
-				
-				case 1 : loginService(); break;
-				case 2 : enrollService(); break;
-				case 0 : System.out.println("종료"); break;
-				default : System.out.println("위에 보이는 숫자만 입력하세요");
-				}
-				} 
-				else {
-					System.out.println("--");
-				 
-				
-				}
-			} catch(InputMismatchException e) {
+			}
+				} catch(InputMismatchException e) {
 				System.out.println("입력 형식이 올바르지 않습니다. ");
 				e.printStackTrace();
 			}

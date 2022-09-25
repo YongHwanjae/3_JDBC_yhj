@@ -2,23 +2,23 @@ package Member;
 
 public class Player {
 
-	private int playerNo;
-	private String playerName;
-	private int salary;
-	private int enroll;
-	private String team;
-	private String password;
+	private int playerNo;         // 번호
+	private String playerName;	  // 이름
+	private int salary;			  // 연봉
+	private int enroll;			  // 입단년도
+	private String team;		  // 팀
+	private String password;	  // 비밀번호
 
-	private int batAtTime;
-	private int hit;
-	private int homerun;
-	private double avgBat;
+	private int batAtTime;		  // 타수
+	private int hit;			  // 안타
+	private int homerun;		  // 홈런
+	private double avgBat;		  // 타율
 	
-	private int victory;
-	private int lose;
-	private double inning;
-	private int er;
-	private double era;
+	private int victory;		  // 승리
+	private int lose;			  // 패배
+	private double inning;		  // 이닝
+	private int er;               // 실점
+	private double era;			  // 방어율
 	
 	public Player() {}
 
