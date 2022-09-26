@@ -8,23 +8,24 @@ public class Player {
 	private int enroll;			  // 입단년도
 	private String team;		  // 팀
 	private String password;	  // 비밀번호
+	private String division; 	  // 구분
 
-	private int batAtTime;		  // 타수
+	private int TimeAtBat;		  // 타수
 	private int hit;			  // 안타
 	private int homerun;		  // 홈런
-	private double avgBat;		  // 타율
+	private double avgBat;		  // 타율 hit/ba
 	
 	private int victory;		  // 승리
 	private int lose;			  // 패배
 	private double inning;		  // 이닝
 	private int er;               // 실점
-	private double era;			  // 방어율
+	private double era;			  // 방어율 (er x 9 ) / inning
 	
 	public Player() {}
 
 	public Player(int playerNo, String playerName, int salary, int enroll, String team, String password,
-			int batAtTime, int hit, int homerun, double avgBat, int victory, int lose, double inning, int er,
-			double era) {
+			int TimeAtBat, int hit, int homerun, double avgBat, int victory, int lose, double inning, int er,
+			double era, String division) {
 		super();
 		this.playerNo = playerNo;
 		this.playerName = playerName;
@@ -32,7 +33,7 @@ public class Player {
 		this.enroll = enroll;
 		this.team = team;
 		this.password = password;
-		this.batAtTime = batAtTime;
+		this.TimeAtBat = TimeAtBat;
 		this.hit = hit;
 		this.homerun = homerun;
 		this.avgBat = avgBat;
@@ -41,9 +42,22 @@ public class Player {
 		this.inning = inning;
 		this.er = er;
 		this.era = era;
+		this.division = division;
+	}
+
+	public String getDivision() {
+		return division;
+	}
+
+	public void setDivision(String division) {
+		this.division = division;
 	}
 
 	public Player(int playerNo, String playerName, int salary, String password) {
+	}
+
+
+	public Player(int playerNo, int ba, int hit, int hr) {
 	}
 
 	public int getPlayerNo() {
@@ -94,12 +108,12 @@ public class Player {
 		this.password = password;
 	}
 
-	public int getBatAtTime() {
-		return batAtTime;
+	public int getTimeAtBat() {
+		return TimeAtBat;
 	}
 
-	public void setBatAtTime(int batAtTime) {
-		this.batAtTime = batAtTime;
+	public void setTimeAtBat(int TimeAtBat) {
+		this.TimeAtBat = TimeAtBat;
 	}
 
 	public int getHit() {

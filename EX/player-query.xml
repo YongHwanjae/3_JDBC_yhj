@@ -5,24 +5,53 @@
 
 <!-- 로그인 -->
 <entry key="loginPlayer">
-SELECT PLAYER_NO, PLAYER_NM, PLAYER_SALARY, PLAYER_TEAM, PLAYER_ENROLL, PLAYER_PASSWORD
+SELECT PLAYER_NO, PLAYER_NM, PLAYER_SALARY, PLAYER_TEAM, PLAYER_ENROLL, PLAYER_PASSWORD, PLAYER_DIV
 FROM PLAYER
 WHERE PLAYER_NO = ?
 AND PLAYER_PASSWORD = ?
 AND PLAYER_TEAM = 'NY'
 </entry>
 
-<!-- 번호 중복 -->
-<entry key="dup">
-SELECT COUNT(*)
-FROM PLAYER
-WHERE PLAYER_NO = ?
-</entry>
 
 <!-- 등록 -->
 <entry key="enroll">
-INSERT INTO PLAYER
-VALUES(?, ?, ?, DEFAULT, DEFAULT, ?)
+INSERT INTO PLAYER(PLAYER_NO, PLAYER_NM, PLAYER_SALARY, PLAYER_PASSWORD, PLAYER_DIV)
+VALUES(?, ?, ?, ?, ?)
 </entry>
 
+<!-- 타자 성적 등록 -->
+<entry key="insertHitter">
+INSERT INTO HITTER VALUES(?, ?, ?, ?)
+</entry>
+
+<!-- 타자 성적 조회 -->
+<entry key="selectHitter">
+SELECT PLAYER_NO, PLAYER_AB, PLAYER_HIT, PLAYER_HOME, ROUND(PLAYER_HIT / PLAYER_AB , 3)
+FROM HITTER
+WHERE PLAYER_NO = ?
+</entry>
+
+<!-- 투수 성적 등록 -->
+<entry key="insertPitcher">
+INSERT INTO PITCHER VALUES(?, ?, ?, ?, ?)
+</entry>
+
+<!-- 투수 성적 조회 -->
+<entry key="selectPitcher">
+SELECT PLAYER_NO, PLAYE_VIC, PLA_LOSE, PLY_INN, PLA_ER, ROUND( PLA_ER * 9 / PLY_INN, 2)
+FROM PITCHER
+WHERE PLAYER_NO = ?
+</entry>
+
+<!-- 연봉 변경 -->
+<entry key="updateSalary">
+UPDATE PLAYER SET PLAYER_SALARY = ?
+WHERE PLAYER_NO = ?
+</entry>
+
+<!-- 팀 변경  -->
+<entry key="updateTeam">
+UPDATE PLAYER SET PLAYER_TEAM = ?
+WHERE PLAYER_NO = ?
+</entry>
 </properties>
