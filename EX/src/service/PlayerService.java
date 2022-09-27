@@ -20,19 +20,17 @@ public class PlayerService {
 	 * @return loginPlayer
 	 * @throws Exception
 	 */
-	public Player login(int playerNo, String password) throws Exception{
+	public Player login(Player player) throws Exception{
 		
 		Connection conn = getConnection();
 		
-		Player loginPlayer = dao.login(conn, playerNo, password);
+		Player loginPlayer = dao.login(conn, player);
 		
 		close(conn);
 		
 		return loginPlayer;
 	}
 
-
-	
 	/** 선수 등록
 	 * @param player
 	 * @return result
@@ -52,7 +50,7 @@ public class PlayerService {
 		return result;
 	}
 
-	/** 타자 성적 추가
+	/** 타자 성적 등록
 	 * @param player
 	 * @throws exception
 	 * @return result
@@ -67,9 +65,23 @@ public class PlayerService {
 		close(conn);
 		return result;
 	}
-
-
-
+	
+	/** 타자 성적 추가
+	 * @param player
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateHitter(Player player) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.updateHitter(conn, player);
+		
+		if(result > 0) commit(conn);
+		else        rollback(conn);
+		close(conn);
+				return result;
+	}
+	
 	/** 타자 성적 조회
 	 * @param playerNo
 	 * @return player
@@ -86,9 +98,7 @@ public class PlayerService {
 		return player;
 	}
 
-
-
-	/** 투수 성적 추가
+	/** 투수 성적 등록
 	 * @param player
 	 * @return result
 	 * @throws Exception
@@ -105,8 +115,24 @@ public class PlayerService {
 		close(conn);
 		return result;
 	}
-
-
+	
+	/** 투수 성적 추가
+	 * @param player
+	 * @return result
+	 */
+	public int updatePitcher(Player player) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updatePitcher(conn, player);
+		
+		if(result >0) commit(conn);
+		else        rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 
 	/** 투수 성적 조회
 	 * @param playerNo
@@ -123,8 +149,6 @@ public class PlayerService {
 		
 		return player;
 	}
-
-
 
 	/** 연봉 변경 서비스
 	 * @param player
@@ -144,8 +168,6 @@ public class PlayerService {
 		return result;
 	}
 
-
-
 	/** 팀 변경 서비스
 	 * @param player
 	 * @return result
@@ -164,11 +186,59 @@ public class PlayerService {
 		return result;
 	}
 
+	/** 투수 전체 조회 서비스
+	 * @return playerList
+	 * @throws Exception
+	 */
+	public List<Player> selectPitcherAll() throws Exception{
+		Connection conn = getConnection();
+		
+		List<Player> playerList = dao.selectPitcherAll(conn);
+		
+		close(conn);
+		
+		return playerList;
+	}
+
+	/** 타자 전체 조회 서비스
+	 * @return playerList
+	 * @throws Exception
+	 */
+	public List<Player> selectHitterAll() throws Exception {
+		Connection conn = getConnection();
+		
+		List<Player> playerList = dao.selectHitterAll(conn);
+		
+		close(conn);
+		
+		return playerList;
+	}
+
+	public int numberDupCheck(int playerNo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.numberDupCheck(conn, playerNo);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public List<Player> selectPlayerAll() throws Exception{
+		Connection conn = getConnection();
+		
+		List<Player> playerList = dao.selectPlayerAll(conn);
+		
+		close(conn);
+		
+		return playerList;
+	}
+}
+
 
 
 	
-	}
-
+	
 
 
 	

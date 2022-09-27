@@ -19,9 +19,18 @@ INSERT INTO PLAYER(PLAYER_NO, PLAYER_NM, PLAYER_SALARY, PLAYER_PASSWORD, PLAYER_
 VALUES(?, ?, ?, ?, ?)
 </entry>
 
-<!-- 타자 성적 등록 -->
+<!-- 타자 성적 첫 등록 -->
 <entry key="insertHitter">
 INSERT INTO HITTER VALUES(?, ?, ?, ?)
+</entry>
+
+<!-- 타자 성적 실시간 추가 -->
+<entry key="updateHitter">
+UPDATE HITTER SET
+PLAYER_AB = PLAYER_AB + ?,
+PLAYER_HIT = PLAYER_HIT + ?,
+PLAYER_HOME = PLAYER_HOME + ?
+WHERE PLAYER_NO = ?
 </entry>
 
 <!-- 타자 성적 조회 -->
@@ -34,6 +43,16 @@ WHERE PLAYER_NO = ?
 <!-- 투수 성적 등록 -->
 <entry key="insertPitcher">
 INSERT INTO PITCHER VALUES(?, ?, ?, ?, ?)
+</entry>
+
+<!-- 투수 성적 추가 -->
+<entry key="updatePitcher">
+UPDATE PITCHER SET 
+PLAYE_VIC = PLAYE_VIC + ?,
+PLA_LOSE = PLA_LOSE + ?,
+PLY_INN = PLY_INN + ?,
+PLA_ER = PLA_ER + ?
+WHERE PLAYER_NO = ?
 </entry>
 
 <!-- 투수 성적 조회 -->
@@ -53,5 +72,35 @@ WHERE PLAYER_NO = ?
 <entry key="updateTeam">
 UPDATE PLAYER SET PLAYER_TEAM = ?
 WHERE PLAYER_NO = ?
+</entry>
+
+<!-- 투수 전체 조회 -->
+<entry key="selectPitcherAll">SELECT PLAYER_NO, PLAYER_NM, PLAYE_VIC, PLA_LOSE, PLY_INN, ROUND((PLA_ER * 9 / PLY_INN), 2)
+FROM PLAYER
+JOIN PITCHER USING(PLAYER_NO)
+WHERE PLAYER_TEAM = 'NY'
+</entry>
+
+<!-- 타자 전체 조회 -->
+<entry key="selectHitterAll">
+SELECT PLAYER_NO, PLAYER_NM, PLAYER_AB, PLAYER_HIT, PLAYER_HOME, ROUND((PLAYER_HIT / PLAYER_AB), 3)
+FROM PLAYER
+JOIN HITTER USING(PLAYER_NO)
+WHERE PLAYER_TEAM = 'NY'
+</entry>
+
+<!-- 번호 중복 -->
+<entry key="numberDupCheck">
+SELECT COUNT(*)
+FROM PLAYER
+WHERE PLAYER_TEAM = 'NY'
+AND PLAYER_NO = ?
+</entry>
+
+<!-- 선수 정보 조회 -->
+<entry key="selectPlayerAll">
+SELECT PLAYER_NO, PLAYER_NM, PLAYER_SALARY, PLAYER_ENROLL, PLAYER_DIV, SUBSTR(PLAYER_PASSWORD, 1, 2)||'**' 
+FROM PLAYER
+WHERE PLAYER_TEAM = 'NY'
 </entry>
 </properties>
