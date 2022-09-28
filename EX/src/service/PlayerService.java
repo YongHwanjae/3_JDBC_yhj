@@ -52,7 +52,7 @@ public class PlayerService {
 
 	/** 타자 성적 등록
 	 * @param player
-	 * @throws exception
+	 * @throws Exception
 	 * @return result
 	 */
 	public int insertHitter(Player player) throws Exception{
@@ -119,6 +119,7 @@ public class PlayerService {
 	/** 투수 성적 추가
 	 * @param player
 	 * @return result
+	 * @throws Exception
 	 */
 	public int updatePitcher(Player player) throws Exception{
 		
@@ -214,6 +215,11 @@ public class PlayerService {
 		return playerList;
 	}
 
+	/** 번호 중복
+	 * @param playerNo
+	 * @return result
+	 * @throws Exception
+	 */
 	public int numberDupCheck(int playerNo) throws Exception {
 		Connection conn = getConnection();
 		
@@ -224,6 +230,10 @@ public class PlayerService {
 		return result;
 	}
 
+	/** 모든 선수정보 조회
+	 * @return playerList
+	 * @throws Exception
+	 */
 	public List<Player> selectPlayerAll() throws Exception{
 		Connection conn = getConnection();
 		
@@ -234,23 +244,3 @@ public class PlayerService {
 		return playerList;
 	}
 }
-
-
-
-	
-	
-
-
-	
-	
-
-
-
-	
-	
-
-
-
-	
-
-

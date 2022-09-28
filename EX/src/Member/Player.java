@@ -61,7 +61,6 @@ public class Player {
 	}
 
 	public Player(int playerNo2, String string, int int1, int int2, String string2, String password2, String string3) {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getPlayerNo() {

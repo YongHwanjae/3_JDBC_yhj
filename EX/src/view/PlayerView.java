@@ -69,7 +69,7 @@ public class PlayerView {
 							case 4 : break;
 							}
 							} else if(num == 2 && loginPlayer.getDivision().equals("PIT")) {
-							System.out.println("1. 기록 첫 등록");
+							System.out.println("\n1. 기록 첫 등록");
 							System.out.println("2. 경기 결과 추가");
 							System.out.println("3. 개인 성적 조회");
 							System.out.println("4. 돌아가기");
@@ -83,7 +83,7 @@ public class PlayerView {
 							case 4 : break;
 							}
 							} else if(num == 3 && loginPlayer.getDivision().equals("MANAGER")) {
-							System.out.println("1. 연봉 변경");
+							System.out.println("\n1. 연봉 변경");
 							System.out.println("2. 소속 변경");
 							System.out.println("3. 투수 전체 성적 조회");
 							System.out.println("4. 타자 전체 성적 조회");
@@ -119,7 +119,7 @@ public class PlayerView {
 	 * 로그인
 	 */
 	private void loginService() {
-		System.out.println("========================================================");
+		System.out.println("\n========================================================\n");
 		System.out.println("\n[로그인]\n");
 		
 		System.out.print("번호 입력 : ");
@@ -153,7 +153,7 @@ public class PlayerView {
 	 * 선수 등록
 	 */
 	private void enrollService() {
-		System.out.println("<< 선수 등록 페이지 >>");
+		System.out.println("\n<< 선수 등록 페이지 >>\n");
 		int playerNo = 0;
 		String playerName = null;
 		int salary = 0;
@@ -181,11 +181,21 @@ public class PlayerView {
 				salary = sc.nextInt();
 				
 				System.out.print("비밀번호 입력 : ");
-				password = sc.next();
+				password = sc.next().toUpperCase();
 				
+			while(true) {
+				
+			
 				System.out.print("투수(PIT) / 타자(HIT) 입력 : ");
 				division = sc.next().toUpperCase();
 			
+				if(division.equals("PIT") || division.equals("HIT")) {
+					break;
+				} else {
+					System.out.println("다시 입력해주세요");
+				}
+				
+				}
 				Player player = new Player();
 				player.setPlayerNo(playerNo);
 				player.setPlayerName(playerName);
@@ -249,6 +259,7 @@ public class PlayerView {
 	 */
 	private void updateHitter() {
 		try {	
+			
 			System.out.println("\n[경기 결과 추가]");
 			System.out.println("(기존 데이터에 누적됩니다. 첫 등록은 다른 메뉴를 이용해주세요.)\n");
 			
@@ -421,7 +432,7 @@ public class PlayerView {
 				System.out.println("조회 결과가 없습니다.");
 			} else {
 				System.out.println("| 번호 | 승리 | 패배 |   이닝   | 방어율 |");
-				System.out.printf("| %d  |  %d | %3d | %.3f | %.2f |", 
+				System.out.printf("| %2d  | %3d | %3d | %.3f | %.2f |", 
 									player.getPlayerNo(),
 									player.getVictory(),
 									player.getLose(),
@@ -444,7 +455,7 @@ public class PlayerView {
 	 */
 	private void updateSalary() {
 		try {	
-			System.out.println("[연봉 변경]");
+			System.out.println("\n[연봉 변경]\n");
 			System.out.print("연봉을 바꿀 선수의 번호를 입력하세요 : ");
 			int playerNo = sc.nextInt();
 			
@@ -475,12 +486,12 @@ public class PlayerView {
 	 */
 	private void updateTeam() {
 		try {
-			System.out.println("[소속 팀 변경]");
+			System.out.println("\n[소속 팀 변경]\n");
 			System.out.print("팀을 변경할 선수의 번호를 입력해주세요 : ");
 			int playerNo = sc.nextInt();
 			
 			System.out.print("이적할 팀을 입력해주세요 : ");
-			String team = sc.next();
+			String team = sc.next();		
 			
 			Player player = new Player();
 			player.setPlayerNo(playerNo);
@@ -506,7 +517,7 @@ public class PlayerView {
 	private void selectPitcherAll() {
 		try {
 			System.out.println("============================================================");
-			System.out.println("[전체 투수 성적 조회]");
+			System.out.println("\n[전체 투수 성적 조회]\n");
 			
 			List<Player> playerList = service.selectPitcherAll();
 			
@@ -576,15 +587,15 @@ public class PlayerView {
 			if(playerList.isEmpty()) {
 				System.out.println("조회 결과가 없습니다.");
 			} else {
-				System.out.println("| 번호 |   이름   |   연봉   | 입단년도 | 구분 | 비밀번호 | ");
+				System.out.println("| 번호 |     이름     |     연봉    | 입단년도 |  구분  | ");
 				for(Player p : playerList) {
-					System.out.printf("| %3d | %6s | %10d | %3d | %s | %s |\n", 
+					System.out.printf("| %3d | %10s | %10d | %3d | %5s |\n", 
 							             p.getPlayerNo(),
 							             p.getPlayerName(),
 							             p.getSalary(),
 							             p.getEnroll(),
-							             p.getDivision(),
-							             p.getPassword());
+							             p.getDivision());
+							            
 				}
 			}
 		} catch(Exception e) {
@@ -593,5 +604,8 @@ public class PlayerView {
 		}
 		
 	}
+	
+	
+	
 	
 }

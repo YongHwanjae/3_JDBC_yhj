@@ -495,7 +495,7 @@ public class PlayerDAO {
 				int salary = rs.getInt("PLAYER_SALARY");
 				int enroll = rs.getInt("PLAYER_ENROLL");
 				String division = rs.getString("PLAYER_DIV");
-				String password = rs.getString(6);
+				
 			
 				Player player = new Player();
 				player.setPlayerNo(playerNo);
@@ -503,7 +503,7 @@ public class PlayerDAO {
 				player.setSalary(salary);
 				player.setEnroll(enroll);
 				player.setDivision(division);
-				player.setPassword(password);
+				
 				
 				playerList.add(player);
 				
